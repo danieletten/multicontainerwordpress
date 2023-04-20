@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:8.0-apache
 
 # install the PHP extensions we need
 RUN set -ex; \
@@ -29,7 +29,7 @@ RUN set -ex; \
 	rm -rf /var/lib/apt/lists/*
 
 #install redis php extension
-ENV PHPREDIS_VERSION=4.0.2
+ENV PHPREDIS_VERSION=5.3.7
 
 RUN docker-php-source extract \
   && curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz \
@@ -54,8 +54,8 @@ RUN a2enmod rewrite expires
 
 VOLUME /var/www/html
 
-ENV WORDPRESS_VERSION 4.9.6
-ENV WORDPRESS_SHA1 6992f19163e21720b5693bed71ffe1ab17a4533a
+ENV WORDPRESS_VERSION 6.2
+ENV WORDPRESS_SHA1 6fcc4c21b107a355e3df0798851d41e0d85f0e6d
 
 RUN set -ex; \
 	curl -o wordpress.tar.gz -fSL "https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz"; \
